@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.common.vo.CheckBox;
 import com.demo.common.vo.JsonResult;
+import com.demo.common.vo.PageObject;
 import com.demo.pojo.Role;
 import com.demo.service.RoleService;
-import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/role/")
@@ -50,8 +50,8 @@ public class RoleController {
 	 @RequestMapping("doFindPageObjects")
 	 @ResponseBody
 	 public JsonResult doFindPageObjects(String name,Integer pageCurrent){
-		 PageInfo<Role> roleList = roleService.findPageObjects(name, pageCurrent);
-		 return new JsonResult(roleList);
+		 PageObject<Role> rolePage = roleService.findPageObjects(name, pageCurrent);
+		 return new JsonResult(rolePage);
 	 }
 	 /**添加角色*/
 	 @RequestMapping("doSaveObject")

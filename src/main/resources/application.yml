@@ -51,18 +51,6 @@ mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   #定义实体类位置
   type-aliases-package: com.demo.pojo
-#通用mapper配置
-mapper:
-    #mappers 多个接口时逗号隔开
-    mappers: tk.mybatis.mapper.common.BaseMapper
-    not-empty: false
-    identity: MYSQL
-#pagehelper分页插件
-pagehelper:
-    helper-dialect: mysql
-    reasonable: true
-    params: count=countSql
-    support-methods-arguments: true
 #控制台打印sql语句
 logging:
   level:

@@ -61,18 +61,6 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-		<!--通用Mapper-->
-		<dependency>
-		    <groupId>tk.mybatis</groupId>
-		    <artifactId>mapper-spring-boot-starter</artifactId>
-		    <version>2.0.3</version>
-		</dependency>
-		<!--pageHelper分页工具-->
-		<dependency>
-		    <groupId>com.github.pagehelper</groupId>
-		    <artifactId>pagehelper-spring-boot-starter</artifactId>
-		    <version>1.2.5</version>
-		</dependency>
 		<!-- SpringBoot的缓存依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

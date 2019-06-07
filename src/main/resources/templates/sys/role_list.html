@@ -134,7 +134,7 @@
    
    function doHandleResponseResult(result){   
 	   if(result.state==1){
-		  doSetTableBodyRows(result.data.list);
+		  doSetTableBodyRows(result.data.records);
 		  doSetPagination(result.data);
 	   }else{
 		  doSetTableBodyErrors(result.message);
@@ -158,17 +158,17 @@
 	   tBody.append(tr);
    }
    
-   function doSetTableBodyRows(list){   
+   function doSetTableBodyRows(records){   
 	  //获取tbody对象,并清空
 	   var tBody = $("#tbodyId");
 	   tBody.empty();
 	   //2.迭代数据,并追加到tBody
-	   for(var i in list){
+	   for(var i in records){
 		  //2.1构建tr对象
 		  var tr = $("<tr></tr>");
-		  tr.data("id",list[i].id);
+		  tr.data("id",records[i].id);
 		  //2.2构建tds对象
-		  var tds = doCreateTds(list[i], parseInt(i));
+		  var tds = doCreateTds(records[i], parseInt(i));
 		  //2.3将tds对象追加到tr中
 		  tr.append(tds);
 		  //2.4将tr追加到tbody中

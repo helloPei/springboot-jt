@@ -9,14 +9,12 @@ import org.springframework.util.StringUtils;
 
 import com.demo.common.exception.ServiceException;
 import com.demo.common.vo.CheckBox;
-
+import com.demo.common.vo.PageObject;
 import com.demo.mapper.RoleMapper;
 import com.demo.mapper.RoleMenuMapper;
 import com.demo.mapper.UserRoleMapper;
 import com.demo.pojo.Role;
 import com.demo.service.RoleService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -100,25 +98,25 @@ public class RoleServiceImpl implements RoleService {
 	}
 	
 	@Override
-	public PageInfo<Role> findPageObjects(String name, Integer pageCurrent) {
-		Role role = new Role();
-		role.setName(name);
-		//1.参数有效性验证
-		if(pageCurrent == null || pageCurrent < 1)
+	public PageObject<Role> findPageObjects(String name, Integer pageCurrent) {
+		// 1.参数有效性验证
+		if (pageCurrent == null || pageCurrent < 1)
 			throw new IllegalArgumentException("参数值无效");
-		//2.基于条件查询总记录数
-		int rowCount = roleMapper.selectCount(role);
-		//3.判定总记录数
-		if(rowCount == 0)
+		// 2.基于条件查询总记录数
+		int rowCount = roleMapper.getRowCount(name);
+		// 3.判定总记录数
+		if (rowCount == 0)
 			throw new ServiceException("记录不存在");
-		//4.查询当前页数据
-		List<Role> roleList = null;
-		if(StringUtils.isEmpty(name)) {
-			PageHelper.startPage(pageCurrent,10,"id desc");
-			roleList = roleMapper.selectAll();
-		} else {
-			roleList = roleMapper.select(role);
-		}
-		return new PageInfo<Role>(roleList);
+		// 4.查询当前页数据
+		Integer pageSize = 2;
+		Integer startIndex = (pageCurrent - 1) * pageSize;// 起始位置
+		List<Role> records = roleMapper.findPageObjects(name, startIndex, pageSize);
+		// 5.封装结果
+		PageObject<Role> pageObject = new PageObject<>();
+		pageObject.setRowCount(rowCount);
+		pageObject.setPageCurrent(pageCurrent);
+		pageObject.setPageSize(pageSize);
+		pageObject.setRecords(records);
+		return pageObject;
 	}
 }

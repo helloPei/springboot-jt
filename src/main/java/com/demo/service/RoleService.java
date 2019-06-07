@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.demo.common.vo.CheckBox;
+import com.demo.common.vo.PageObject;
 import com.demo.pojo.Role;
-import com.github.pagehelper.PageInfo;
 
 public interface RoleService {
 	
@@ -23,11 +23,9 @@ public interface RoleService {
 	 Map<String,Object> findObjectById(Integer id) ;
 	
 	
-	 int updateObject(
-			 Role entity,Integer[] menuIds);
+	 int updateObject(Role entity, Integer[] menuIds);
 	 
-	 int saveObject(
-			 Role entity,Integer[] menuIds);
+	 int saveObject(Role entity, Integer[] menuIds);
 	 
 	 /**
 	  * 基于id删除角色以及关系数据
@@ -42,6 +40,5 @@ public interface RoleService {
 	  * @param pageCurrent
 	  * @return
 	  */
-	 PageInfo<Role> findPageObjects(
-			 String name,Integer pageCurrent);
+	 PageObject<Role> findPageObjects(String name, Integer pageCurrent);
 }

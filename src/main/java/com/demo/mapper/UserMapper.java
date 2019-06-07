@@ -8,15 +8,13 @@ import org.apache.ibatis.annotations.Param;
 import com.demo.pojo.User;
 import com.demo.pojo.vo.UserDeptResult;
 
-import tk.mybatis.mapper.common.BaseMapper;
-
 /**
  * User持久层实现Mybatis框架中的Mapper接口，声名对数据库的操作方法
  * @author Administrator
  *
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User>{
+public interface UserMapper {
 	/**保存用户自身信息*/
 	int insertObject(User user);
 	/**更新用户自身信息*/

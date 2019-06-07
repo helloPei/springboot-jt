@@ -2,13 +2,13 @@ package com.demo.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.demo.common.vo.CheckBox;
 import com.demo.pojo.Role;
 
-import tk.mybatis.mapper.common.BaseMapper;
 @Mapper
-public interface RoleMapper extends BaseMapper<Role> {
+public interface RoleMapper {
 	/**查询所有角色的id,name字段的值，每行记录封装一个checbox对象*/
 	List<CheckBox> findObjects();
 	/**修改角色自身信息*/
@@ -18,6 +18,14 @@ public interface RoleMapper extends BaseMapper<Role> {
 	//SysRoleMenuResult findObjectById(Integer id);
 	/**保存角色自身信息*/
 	int insertObject(Role role);
-	/** 基于角色id删除角色自身信息*/
-	int deleteObject(Integer id); 
+	/**基于角色id删除角色自身信息*/
+	int deleteObject(Integer id);
+	/**依据条件查询总记录数(要依据这个值计算总页数)*/
+	int getRowCount(@Param("name") String name);
+	/**查询当前页数据*/
+	List<Role> findPageObjects(
+		@Param("name") String name, 
+		@Param("startIndex") Integer startIndex,
+		@Param("pageSize") Integer pageSize
+	);
 }
