@@ -29,8 +29,12 @@ public class LoginController {
 	public JsonResult doLogin(String username, String password, Integer isRememberMe){
 		//用户名密码非空判断
 		if(StringUtils.isEmpty(username)||StringUtils.isEmpty(password)) {
-			if(StringUtils.isEmpty(username))return new JsonResult("用户名不能为空");
-			if(StringUtils.isEmpty(password))return new JsonResult("密码不能为空");
+			if(StringUtils.isEmpty(username)) {
+				return new JsonResult("用户名不能为空");
+			}
+			if(StringUtils.isEmpty(password)) {
+				return new JsonResult("密码不能为空");
+			}
 		}
 		//1.根据用户名和密码获取一个令牌（token）
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
@@ -58,10 +62,10 @@ public class LoginController {
 	 * Logout登出
 	 * @return
 	 */
-	@RequestMapping("doLogout")
-	public String doLogout() {
-		Subject currentUser = SecurityUtils.getSubject();
-		currentUser.logout();
-		return "login";
-	}
+//	@RequestMapping("doLogout")
+//	public String doLogout() {
+//		Subject currentUser = SecurityUtils.getSubject();
+//		currentUser.logout();
+//		return "login";
+//	}
 }
